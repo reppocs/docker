@@ -1,0 +1,15 @@
+---
+version: "2.1"
+services:
+  heimdall:
+    image: hub.docker.com/r/prom/prometheus
+    container_name: prom/prometheus
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /data/prometheus:/config
+    ports:
+      - 9090:9090
+    restart: unless-stopped
