@@ -1,1 +1,2 @@
-plexclaim.txt
+.gitignore
+*.secret
