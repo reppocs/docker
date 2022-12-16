@@ -1,21 +1,6 @@
 version: "2.1"
 
 services:
-  plex:
-    image: lscr.io/linuxserver/plex
-    container_name: plex
-    network_mode: host
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - VERSION=docker
-      - PLEX_CLAIM=claim-LETTERSANDNUMBERS
-    volumes:
-      - /data/plex/plex/config:/config
-      - /data/plex/plex/transcode:/transcode
-      - /data/plex/media:/media
-    restart: unless-stopped
-
   radarr:
     image: lscr.io/linuxserver/radarr
     container_name: radarr
@@ -26,9 +11,9 @@ services:
     volumes:
       - /data/plex/radarr/config:/config
       - /data/plex/media/movies:/media
-      - /data/plex/downloads/complete:/downloads
+      - /data/plex/sabnzbd/config/Downloads/complete:/downloads
     ports:
-      - 7878:7878
+        - 7878:7878
     restart: unless-stopped
     networks:
       net:
@@ -43,8 +28,6 @@ services:
       - TZ=America/New_York
     volumes:
       - /data/plex/sabnzbd/config:/config
-      - /data/plex/downloads/complete:/downloads
-      - /data/plex/downloads/incomplete:/incomplete-downloads
     ports:
       - 8080:8080
     restart: unless-stopped
@@ -62,7 +45,7 @@ services:
     volumes:
       - /data/plex/sonarr/config:/config
       - /data/plex/media/tv:/media
-      - /data/plex/downloads/complete:/downloads
+      - /data/plex/sabnzbd/config/Downloads/complete:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
